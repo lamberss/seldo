@@ -1,0 +1,5 @@
+#!/bin/bash
+
+PYTHONPATH=.:$PYTHONPATH
+
+python -m core.runner "$@"

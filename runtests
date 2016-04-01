@@ -1,0 +1,32 @@
+#!/bin/sh
+
+function echo_help {
+    echo -e "USAGE: runtests [-c] [-h] [-v]\n"
+    echo -e "\t-c\tturn on test coverage"
+    echo -e "\t-h\tprint this help message and exit"
+    echo -e "\t-v\tturn on verbose output"
+}
+
+args=""
+coverage_args="--with-coverage --cover-branch --cover-erase --cover-package=core --cover-html"
+
+OPTIND=1
+while getopts "chv" opt; do
+    case "$opt" in
+	c)
+	    args="$args $coverage_args"
+	    ;;
+	h)
+	    echo_help
+	    exit 0
+	    ;;
+	v)
+	    args="$args -v"
+	    ;;
+    esac
+done
+
+shift $((OPTIND-1))
+[ "$1"  = "--" ] && shift
+
+nosetests $args
