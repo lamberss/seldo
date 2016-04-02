@@ -44,12 +44,25 @@ class Config(collections.MutableMapping):
             print("Verbose output is turned on.")
     """
 
-    __shared_state = {}
+    __shared_state = {'_config': {}}
     
     def __init__(self):
         """Initialize the configuration dictionary object."""
         self.__dict__ = self.__shared_state
+        self._defaults = {'dbfile': 'seldo.db'}
+
+        if len(self._config) == 0:
+            self.reset()
+
+
+    def reset(self):
+        """Resets the configuration dictionary to the values determined
+        from defaults, the configuration file, the command line, and
+        environment variables.  Mostly used during testing.
+        """
         self._config = {}
+        for key in self._defaults:
+            self._config[key] = self._defaults[key]
 
 
     def __delitem__(self, key):
