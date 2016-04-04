@@ -1,6 +1,6 @@
 #!/bin/sh
 
-function echo_help {
+echo_help() {
     echo -e "USAGE: runtests [-c] [-h] [-v]\n"
     echo -e "\t-c\tturn on test coverage"
     echo -e "\t-h\tprint this help message and exit"
