@@ -14,10 +14,13 @@
 
 """Code to test the config module."""
 
+import logging
 import unittest
+
 import core.config
 
 
+#logging.basicConfig(level=logging.DEBUG)
 
 class TestConfig(unittest.TestCase):
     """Test the Config class."""

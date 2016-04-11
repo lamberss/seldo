@@ -20,6 +20,7 @@ configuration files.
 """
 
 import collections
+import logging
 import os
 
 class Config(collections.MutableMapping):
@@ -50,6 +51,8 @@ class Config(collections.MutableMapping):
         """Initialize the configuration dictionary object."""
         self.__dict__ = self.__shared_state
         self._defaults = {'dbfile': 'seldo.db'}
+        self._log = logging.getLogger(__name__)
+        self._log.addHandler(logging.NullHandler())
 
         if len(self._config) == 0:
             self.reset()
@@ -61,7 +64,10 @@ class Config(collections.MutableMapping):
         environment variables.  Mostly used during testing.
         """
         self._config = {}
+        self._log.debug('Resetting configuration dictionary.')
+        self._log.debug('  Setting from defaults.')
         for key in self._defaults:
+            self._log.debug('    {}: {}'.format(key,self._defaults[key]))
             self._config[key] = self._defaults[key]
 
 
