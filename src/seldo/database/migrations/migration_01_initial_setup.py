@@ -1,3 +1,5 @@
+"""Set up the initial database."""
+
 import sqlite3
 from typing import List, Union
 
